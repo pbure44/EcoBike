@@ -10,7 +10,6 @@ import java.math.BigDecimal;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 public abstract class AbstractBike {
     private String brand;
     private int weight;

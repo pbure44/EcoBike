@@ -24,6 +24,7 @@ public class FileRepository implements ICatalogRepository {
     private SpeedelecMapper speedelecMapper;
     private EBikeMapper eBikeMapper;
     private FoldingBikeMapper foldingBikeMapper;
+    private String dataFile;
 
     public FileRepository() {
         this.bikes = new ArrayList<>();
@@ -34,36 +35,33 @@ public class FileRepository implements ICatalogRepository {
     }
 
 
-
     @Override
-    public void readFile(String dataFile) throws IOException {
+    public void readFile() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         dataFile = reader.readLine();
 
         BufferedReader in = new BufferedReader(new FileReader(dataFile));
-        try {
-            String str;
-            String[] tokens;
-            while ((str = in.readLine()) != null) {
-                tokens = str.split(";");
-                if (tokens[0].contains(BikeType.SPEEDELEC.getBikeType())) {
-                    bikes.add(speedelecMapper.toSpeedElec(tokens));
-                } else if (tokens[0].contains(BikeType.FOLDING_BIKE.getBikeType())) {
-                    bikes.add(foldingBikeMapper.toFoldingBike(tokens));
-                } else if (tokens[0].contains(BikeType.E_BIKE.getBikeType())) {
-                    bikes.add(eBikeMapper.toEBike(tokens));
-                } else {
-                    throw new IllegalArgumentException("Error in If-Else construction");
-                }
+
+        String str;
+        String[] tokens;
+        while ((str = in.readLine()) != null) {
+            tokens = str.split(";");
+            if (tokens[0].contains(BikeType.SPEEDELEC.getBikeType())) {
+                bikes.add(speedelecMapper.toSpeedElec(tokens));
+            } else if (tokens[0].contains(BikeType.FOLDING_BIKE.getBikeType())) {
+                bikes.add(foldingBikeMapper.toFoldingBike(tokens));
+            } else if (tokens[0].contains(BikeType.E_BIKE.getBikeType())) {
+                bikes.add(eBikeMapper.toEBike(tokens));
+            } else {
+                throw new IllegalArgumentException("Error in If-Else readFile method");
             }
-        } catch (IOException e) {
-            System.out.println("File Read Error");
         }
+        System.out.println("Size: "+bikes.size());
     }
 
     @Override
     public void showAll() {
-        for (AbstractBike bike : bikes) {
+        for (Object bike : bikes) {
             System.out.println(bike);
         }
     }
@@ -71,14 +69,14 @@ public class FileRepository implements ICatalogRepository {
     @Override
     public void writeToFile() throws IOException {
 
-        FileWriter fileWriter = new FileWriter(MenuService.dataFile, false);
+        FileWriter fileWriter = new FileWriter(dataFile, false);
+        bikes.addAll(newBikes);
         for (AbstractBike list : bikes) {
             fileWriter.write(list.toList() + System.getProperty("line.separator"));
         }
     }
 
-    public void add(AbstractBike bike){
+    public void add(AbstractBike bike) {
         newBikes.add(bike);
     }
-
 }

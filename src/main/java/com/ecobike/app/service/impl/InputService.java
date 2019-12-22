@@ -12,99 +12,117 @@ import java.math.BigDecimal;
 
 public class InputService {
 
-    public String inputBrand(AbstractBike bike){
+    public String inputBrand(Class bikeClass) {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println();
         System.out.println("Please enter the Brand name");
         try {
-            if(bike.getClass().equals(EBike.class)) {
-                bike.setBrand("E-BIKE " + reader.readLine());
-            } else if(bike.getClass().equals(FoldingBike.class)){
-                bike.setBrand("FOLDING BIKE " + reader.readLine());
-            } else if (bike.getClass().equals(SpeedElec.class)) {
-                bike.setBrand("SPEEDELEC " + reader.readLine());
-            }else {
+            if (bikeClass.equals(EBike.class)) {
+                String str = "E-BIKE " + reader.readLine();
+                return str;
+            } else if (bikeClass.equals(FoldingBike.class)) {
+                String str="FOLDING BIKE " + reader.readLine();
+                return str;
+            } else if (bikeClass.equals(SpeedElec.class)) {
+                String str ="SPEEDELEC " + reader.readLine();
+                return str;
+            } else {
                 throw new IOException();
             }
-        }catch (IOException e){
+        } catch (IOException e) {
             System.out.println("Error in input Brand method");
         }
+        return "-1";
     }
 
-    public void inputWheelSize(FoldingBike bike){
+    public Integer inputWheelSize() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println();
         System.out.println("Please enter the size of the wheels (in inch)");
         try {
-            bike.setWheelSize(Integer.parseInt(reader.readLine()));
+            Integer size =Integer.parseInt(reader.readLine());
+            return size;
         } catch (IOException e) {
-            System.out.println("Error in inputWheelSize method");;
+            System.out.println("Error in inputWheelSize method");
         }
+        return -1;
     }
 
-    public void inputNumOfGears(FoldingBike bike){
+    public Integer inputNumOfGears() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println();
         System.out.println("Please enter the number of Gears ");
         try {
-            bike.setNumOfGears(Integer.parseInt(reader.readLine()));
+            Integer num =Integer.parseInt(reader.readLine());
+            return num;
         } catch (IOException e) {
-            System.out.println("Error in inputNumOfGears method");;
+            System.out.println("Error in inputNumOfGears method");
         }
+        return -1;
     }
 
-    public void inputWeight(AbstractBike bike){
+    public Integer inputWeight() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println();
         System.out.println("Please enter the weight of the bike (in grams)");
         try {
-            bike.setWeight(Integer.parseInt(reader.readLine()));
+            Integer wght = Integer.parseInt(reader.readLine());
+            return wght;
         } catch (IOException e) {
-            System.out.println("Error in inputWeight method");;
+            System.out.println("Error in inputWeight method");
         }
+        return -1;
     }
 
-    public void inputLights (AbstractBike bike){
+    public boolean inputLights() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println();
         System.out.println("Please enter the availability of lights at front and back (TRUE/FALSE)");
         try {
-            bike.setLights(Boolean.parseBoolean(reader.readLine()));
+            Boolean light =Boolean.parseBoolean(reader.readLine());
+            return light;
         } catch (IOException e) {
             System.out.println("Error in inputLights method");
         }
+        return false;
     }
 
-    public void inputColour(AbstractBike bike){
+    public String inputColour() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println();
         System.out.println("Please enter the colour");
         try {
-            bike.setColour(reader.readLine());
+            String str = reader.readLine();
+            return str;
         } catch (IOException e) {
             System.out.println("Error in inputColour method");
         }
+        return "-1";
     }
 
-    public void inputPrice(AbstractBike bike){
+    public BigDecimal inputPrice() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println();
         System.out.println("Please enter the price (EUR)");
         try {
-            bike.setPrice(new BigDecimal(Integer.valueOf(reader.readLine())));
+            BigDecimal price = new BigDecimal(Integer.valueOf(reader.readLine()));
+            return price;
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return BigDecimal.valueOf(-1);
     }
 
-    public void inputMaxSpeed(EBike bike){
+    public Integer inputMaxSpeed() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println();
         System.out.println("Please enter the maximum speed (in km/h)");
         try {
-            bike.setMaxSpeed(Integer.parseInt(reader.readLine()));
-        }catch (IOException e){
+            Integer spd=Integer.parseInt(reader.readLine());
+            return spd;
+        } catch (IOException e) {
             System.out.println("Error in input Brand method");
         }
+        return -1;
     }
 }

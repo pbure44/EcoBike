@@ -10,15 +10,18 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class MenuService {
-    private CatalogService catalogService = new CatalogService();
-    private FileRepository fileRepository = new FileRepository();
+    private CatalogService catalogService;
+    private FileRepository fileRepository;
 
-    public static String dataFile;
+    public MenuService() {
+        this.catalogService = new CatalogService();
+        this.fileRepository = new FileRepository();
+    }
 
     public void menuStart() throws IOException {
         try {
             System.out.println("Please enter the route to datafile");
-            fileRepository.readFile(dataFile);
+            fileRepository.readFile();
             System.out.println("DataFile loaded successfully");
             menuList();
         } catch (IOException e) {
@@ -43,7 +46,7 @@ public class MenuService {
                 Integer num = Integer.parseInt(reader.readLine());
                 switch (num) {
                     case 1:
-                        catalogService.showAll();
+                        fileRepository.showAll(); // правильно ли дергать из repository??
                         continue;
                     case 2:
                         catalogService.add(FoldingBike.class);

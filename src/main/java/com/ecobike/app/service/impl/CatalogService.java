@@ -22,12 +22,14 @@ import java.util.List;
 public class CatalogService implements ICatalogService {
     private FileRepository fileRepository;
     private InputService inputService;
+    private BikeBuilderService bikeBuilderService;
 
     public String dataFilePath;
 
     public CatalogService() {
         this.fileRepository = new FileRepository();
         this.inputService = new InputService();
+        this.bikeBuilderService = new BikeBuilderService();
     }
 
     @Override
@@ -38,70 +40,36 @@ public class CatalogService implements ICatalogService {
 
     @Override
     public Object findOne() {
-        List<String> list = sortService.sort(bikesList);
-        try {
-            String bike = repo.findOne(list);
-            Collections.binarySearch()
-        } catch () {
-            System.out.println("Bike is not found");
-        }
-
-        return bike;
+//        List<String> list = sortService.sort(bikesList);
+//        try {
+//            String bike = repo.findOne(list);
+//            Collections.binarySearch()
+//        } catch () {
+//            System.out.println("Bike is not found");
+//        }
+//
+        return -1;
     }
 
     @Override
     public void add(Class bikeClass) {
-        AbstractBike abstractBike = bikeBuilderService.build(bikeClass);
+        AbstractBike abstractBike = bikeBuilderService.builder(bikeClass);
         fileRepository.add(abstractBike);
     }
 
-
     public void writeToFile() {
         try {
-            FileWriter fileWriter = new FileWriter(MenuService.dataFile, false);
-            for (AbstractBike list : bikesList) {
-                fileWriter.write(list.toList() + System.getProperty("line.separator"));
-            }
+            fileRepository.writeToFile();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-
-    private void addNewEBike(EBike bike) {
-        inputService.inputBrand(bike);
-        inputService.inputM(bike);
-        inputService.inputNumOfGears(bike);
-        inputService.inputWeight(bike);
-        inputService.inputLights(bike);
-        inputService.inputColour(bike);
-        fileRepository.add(bike);
-    }
-
-    @Override
-    public void addNewSpeedElec() {
+    public void readFile() throws IOException{
         try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-            SpeedElec speedElec = new SpeedElec();
-            System.out.println();
-            System.out.println("Please enter the Brand name");
-            speedElec.setBrand("FOLDING BIKE " + reader.readLine());
-            System.out.println("Please enter the maximum speed (in km/h)");
-            speedElec.setMaxSpeed(Integer.parseInt(reader.readLine()));
-            System.out.println("Please enter the weight of the bike (in grams)");
-            speedElec.setWeight(Integer.parseInt(reader.readLine()));
-            System.out.println("Please enter the availability of lights at front and back (TRUE/FALSE)");
-            speedElec.setLights(Boolean.parseBoolean(reader.readLine()));
-            System.out.println("Please enter the color");
-            speedElec.setColour(reader.readLine());
-            System.out.println("Please enter the price (EUR)");
-            speedElec.setPrice(new BigDecimal(Integer.valueOf(reader.readLine())));
-            System.out.println(speedElec);
-            bikesList.add(speedElec);
-            System.out.println("New bike added");
+            fileRepository.readFile();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("File Read Error");
         }
-
     }
 }
