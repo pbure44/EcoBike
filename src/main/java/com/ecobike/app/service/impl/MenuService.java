@@ -3,25 +3,32 @@ package com.ecobike.app.service.impl;
 import com.ecobike.app.model.EBike;
 import com.ecobike.app.model.FoldingBike;
 import com.ecobike.app.model.SpeedElec;
+import com.ecobike.app.repository.IFileRepository;
 import com.ecobike.app.repository.impl.FileRepository;
+import com.ecobike.app.service.ICatalogService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+@Service
 public class MenuService {
-    private CatalogService catalogService;
-    private FileRepository fileRepository;
+    private final ICatalogService catalogService;
+    private BufferedReader reader;
+    private static String fileName;
 
-    public MenuService() {
-        this.catalogService = new CatalogService();
-        this.fileRepository = new FileRepository();
+    public MenuService(CatalogService catalogService) {
+        this.catalogService = catalogService;
+        this.reader = new BufferedReader(new InputStreamReader(System.in));
     }
 
     public void menuStart() throws IOException {
         try {
+            fileName = reader.readLine();
             System.out.println("Please enter the route to datafile");
-            fileRepository.readFile();
+            catalogService.readFile(fileName);
             System.out.println("DataFile loaded successfully");
             menuList();
         } catch (IOException e) {
@@ -42,11 +49,10 @@ public class MenuService {
                         "5 – Find the first item of a particular brand\n" +
                         "6 – Write to file\n" +
                         "7 – Stop the program");
-                BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
                 Integer num = Integer.parseInt(reader.readLine());
                 switch (num) {
                     case 1:
-                        fileRepository.showAll(); // правильно ли дергать из repository??
+                        catalogService.showAll(); // правильно ли дергать из repository??
                         continue;
                     case 2:
                         catalogService.add(FoldingBike.class);
@@ -61,14 +67,13 @@ public class MenuService {
                         catalogService.findOne();
                         continue;
                     case 6:
-                        catalogService.writeToFile();
+                        catalogService.writeToFile(fileName);
                         continue;
                     case 7:
                         break;
                     default:
                         throw new IllegalArgumentException();
                 }
-                if (num == 7) break;
             }
         } catch (IOException e) {
             e.printStackTrace();

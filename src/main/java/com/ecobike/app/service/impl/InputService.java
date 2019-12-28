@@ -4,16 +4,19 @@ import com.ecobike.app.model.AbstractBike;
 import com.ecobike.app.model.EBike;
 import com.ecobike.app.model.FoldingBike;
 import com.ecobike.app.model.SpeedElec;
+import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
 
+@Service
 public class InputService {
 
+    private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
     public String inputBrand(Class bikeClass) {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println();
         System.out.println("Please enter the Brand name");
         try {
@@ -21,13 +24,13 @@ public class InputService {
                 String str = "E-BIKE " + reader.readLine();
                 return str;
             } else if (bikeClass.equals(FoldingBike.class)) {
-                String str="FOLDING BIKE " + reader.readLine();
+                String str = "FOLDING BIKE " + reader.readLine();
                 return str;
             } else if (bikeClass.equals(SpeedElec.class)) {
-                String str ="SPEEDELEC " + reader.readLine();
+                String str = "SPEEDELEC " + reader.readLine();
                 return str;
             } else {
-                throw new IOException();
+                System.out.println("Wrong parameter 'bikeClass'");
             }
         } catch (IOException e) {
             System.out.println("Error in input Brand method");
@@ -36,11 +39,10 @@ public class InputService {
     }
 
     public Integer inputWheelSize() {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println();
         System.out.println("Please enter the size of the wheels (in inch)");
         try {
-            Integer size =Integer.parseInt(reader.readLine());
+            Integer size = Integer.parseInt(reader.readLine());
             return size;
         } catch (IOException e) {
             System.out.println("Error in inputWheelSize method");
@@ -49,11 +51,10 @@ public class InputService {
     }
 
     public Integer inputNumOfGears() {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println();
         System.out.println("Please enter the number of Gears ");
         try {
-            Integer num =Integer.parseInt(reader.readLine());
+            Integer num = Integer.parseInt(reader.readLine());
             return num;
         } catch (IOException e) {
             System.out.println("Error in inputNumOfGears method");
@@ -62,7 +63,6 @@ public class InputService {
     }
 
     public Integer inputWeight() {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println();
         System.out.println("Please enter the weight of the bike (in grams)");
         try {
@@ -75,11 +75,10 @@ public class InputService {
     }
 
     public boolean inputLights() {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println();
         System.out.println("Please enter the availability of lights at front and back (TRUE/FALSE)");
         try {
-            Boolean light =Boolean.parseBoolean(reader.readLine());
+            Boolean light = Boolean.parseBoolean(reader.readLine());
             return light;
         } catch (IOException e) {
             System.out.println("Error in inputLights method");
@@ -88,7 +87,6 @@ public class InputService {
     }
 
     public String inputColour() {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println();
         System.out.println("Please enter the colour");
         try {
@@ -101,7 +99,6 @@ public class InputService {
     }
 
     public BigDecimal inputPrice() {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println();
         System.out.println("Please enter the price (EUR)");
         try {
@@ -114,15 +111,52 @@ public class InputService {
     }
 
     public Integer inputMaxSpeed() {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println();
         System.out.println("Please enter the maximum speed (in km/h)");
         try {
-            Integer spd=Integer.parseInt(reader.readLine());
+            Integer spd = Integer.parseInt(reader.readLine());
             return spd;
         } catch (IOException e) {
             System.out.println("Error in input Brand method");
         }
         return -1;
+    }
+
+    public Integer inputBatteryCapacity() {
+        System.out.println();
+        System.out.println("Please enter the battery capacity (in mAh)");
+        try {
+            Integer spd = Integer.parseInt(reader.readLine());
+            return spd;
+        } catch (IOException e) {
+            System.out.println("Error in input Battery Capacity method");
+        }
+        return -1;
+    }
+
+    public Integer findBikeType() {
+        System.out.println("Please enter the type of bike:\n+" +
+                "1 - E-Bike\n" +
+                "2 - Folding Bike\n" +
+                "3 - SpeedElec\n");
+        try {
+            //можно ли сделать проверку, что введена цифра от 1 до 9, через аннотацию
+            return Integer.parseInt(reader.readLine());
+        } catch (IOException e) {
+            System.out.println("IOException in findBikeType");
+        }
+        return -1;         //так можно??
+    }
+
+    public String inputBrandFind() {
+        System.out.println();
+        System.out.println("Please enter the brand");
+        try {
+            String str = reader.readLine();
+            return str;
+        } catch (IOException e) {
+            System.out.println("Error in inputBrandFind method");
+        }
+        return "-1";
     }
 }

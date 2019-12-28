@@ -5,7 +5,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.springframework.context.annotation.Bean;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 
 
@@ -13,8 +16,12 @@ import java.math.BigDecimal;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 public class EBike extends AbstractBike {
-    private int maxSpeed;
-    private int batteryCapacity;
+    @NotNull(message = "Max speed must not be null")
+    @Positive(message = "Max speed must be positive number")
+    private Integer maxSpeed;
+    @NotNull(message = "Battery capacity must not be null")
+    @Positive(message = "Battery capacity must be positive number")
+    private Integer batteryCapacity;
 
 
     @Builder
@@ -26,11 +33,12 @@ public class EBike extends AbstractBike {
 
     @Override
     public String toString() {
-        return super.getBrand()+" with "+batteryCapacity+" mAh battery and "+ (super.isLights() ? "no" : "") +
-                " head/tail light.\n"+"Price: "+super.getPrice()+" euros.";
+        return super.getBrand() + " with " + batteryCapacity + " mAh battery and " + (super.getLights() ? "no" : "") +
+                " head/tail light.\n" + "Price: " + super.getPrice() + " euros.";
     }
+
     @Override
-    public String toList(){
-        return super.getBrand()+"; "+maxSpeed+"; "+ super.getWeight() +"; "+ super.isLights() +"; "+ batteryCapacity +"; "+ super.getColour() +"; "+ super.getPrice();
+    public String toList() {
+        return super.getBrand() + "; " + maxSpeed + "; " + super.getWeight() + "; " + super.getLights() + "; " + batteryCapacity + "; " + super.getColour() + "; " + super.getPrice();
     }
 }
