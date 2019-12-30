@@ -32,6 +32,10 @@ public class FileRepository implements IFileRepository {
         this.foldingBikeMapper = new FoldingBikeMapper();
     }
 
+    public static List<AbstractBike> getBIKES() {
+        return BIKES;
+    }
+
     @Override
     public void readFile(String fileName) throws IOException {
         BufferedReader in = new BufferedReader(new FileReader(fileName));

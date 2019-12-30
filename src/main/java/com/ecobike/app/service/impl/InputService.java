@@ -134,18 +134,27 @@ public class InputService {
         return -1;
     }
 
-    public Integer findBikeType() {
-        System.out.println("Please enter the type of bike:\n+" +
+    public Class findBikeType() {
+        System.out.println("Please enter the number of type of bike:\n+" +
                 "1 - E-Bike\n" +
                 "2 - Folding Bike\n" +
                 "3 - SpeedElec\n");
         try {
-            //можно ли сделать проверку, что введена цифра от 1 до 9, через аннотацию
-            return Integer.parseInt(reader.readLine());
+            //можно ли сделать проверку, что введена цифра от 1 до 3, через аннотацию
+            switch (Integer.parseInt(reader.readLine())) {
+                case 1:
+                    return EBike.class;
+                case 2:
+                    return FoldingBike.class;
+                case 3:
+                    return SpeedElec.class;
+                default:
+                    System.out.println("Please enter a number: 1 or 2 or 3");
+            }
         } catch (IOException e) {
             System.out.println("IOException in findBikeType");
         }
-        return -1;         //так можно??
+        return null;         //так правильно??
     }
 
     public String inputBrandFind() {

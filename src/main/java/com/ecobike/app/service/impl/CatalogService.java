@@ -12,10 +12,12 @@ import java.io.IOException;
 public class CatalogService implements ICatalogService {
     private final IFileRepository fileRepository;
     private final BikeBuilderService bikeBuilderService;
+    private SearchService searchService;
 
-    public CatalogService(FileRepository fileRepository, BikeBuilderService bikeBuilderService) {
+    public CatalogService(FileRepository fileRepository, BikeBuilderService bikeBuilderService, SearchService searchService) {
         this.fileRepository = fileRepository;
         this.bikeBuilderService = bikeBuilderService;
+        this.searchService = searchService;
     }
 
     @Override
@@ -24,8 +26,9 @@ public class CatalogService implements ICatalogService {
     }
 
     @Override
-    public Object findOne() {
-        return -1;
+    public void findOne() {
+
+        searchService.find();
     }
 
     @Override
