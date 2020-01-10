@@ -24,24 +24,30 @@ public class SearchThread implements Runnable {
         this.endIndex = endIndex;
         this.searchBike = searchBike;
         this.bikeList = bikeList;
-        this.threadName=threadName;
+        this.threadName = threadName;
     }
 
     @Override
     public void run() {
-        boolean flag = false;
-        for (int i = startIndex; i <= endIndex; i++) {
-            if (checkParameters(bikeList.get(i))){
-                flag=true;
-                System.out.println("There is such bike"+bikeList.get(i));
-                return;
-            }
-            if(!flag){
-                System.out.println("There is no such bike in this thread - "+getThreadName());
-            }
 
+        AbstractBike bike = bikeCheck();
+        if (bike == null) {
+            System.out.println("Such bike NOT FOUND");
+        } else {
+            System.out.println("There is such bike" + bike);
         }
+
     }
+
+    private AbstractBike bikeCheck() {
+        for (int i = startIndex; i <= endIndex; i++) {
+            if (checkParameters(bikeList.get(i))) {
+                return bikeList.get(i);
+            }
+        }
+        return null;
+    }
+
 
     private boolean checkParameters(AbstractBike existedBike) {
         if (!existedBike.getBrand().equalsIgnoreCase(searchBike.getBrand())) return false;

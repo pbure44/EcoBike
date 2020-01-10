@@ -3,12 +3,10 @@ package com.ecobike.app.service.impl;
 import com.ecobike.app.model.EBike;
 import com.ecobike.app.model.FoldingBike;
 import com.ecobike.app.model.SpeedElec;
-import com.ecobike.app.repository.IFileRepository;
-import com.ecobike.app.repository.impl.FileRepository;
 import com.ecobike.app.service.ICatalogService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -24,10 +22,15 @@ public class MenuService {
         this.reader = new BufferedReader(new InputStreamReader(System.in));
     }
 
+    @PostConstruct
+    public void init() throws IOException {
+        menuStart();
+    }
+
     public void menuStart() throws IOException {
         try {
-            fileName = reader.readLine();
             System.out.println("Please enter the route to datafile");
+            fileName = reader.readLine();
             catalogService.readFile(fileName);
             System.out.println("DataFile loaded successfully");
             menuList();

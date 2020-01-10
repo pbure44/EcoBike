@@ -16,6 +16,8 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public abstract class AbstractBike {
     @NotBlank(message = "Brand field required")
+    private String type;
+    @NotBlank(message = "Brand field required")
     private String brand;
     @NotNull(message = "Weight must not be null")
     @Positive(message = "Weight must be positive number")
@@ -31,7 +33,8 @@ public abstract class AbstractBike {
     @Override
     public String toString() {
         return "AbstractBike{" +
-                "brand='" + brand + '\'' +
+                "type='" + brand + '\'' +
+                ", brand='" + brand + '\'' +
                 ", weight=" + weight +
                 ", lights=" + lights +
                 ", colour='" + colour + '\'' +
@@ -41,7 +44,8 @@ public abstract class AbstractBike {
 
     public String toList(){
         return "AbstractBike{" +
-                "brand='" + brand + '\'' +
+                "type='" + brand + '\'' +
+                ", brand='" + brand + '\'' +
                 ", weight=" + weight +
                 ", lights=" + lights +
                 ", colour='" + colour + '\'' +

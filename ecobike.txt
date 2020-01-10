@@ -876,4 +876,3 @@ FOLDING BIKE Benetti; 18; 7; 10900; true;  beige; 1165
 FOLDING BIKE Titan; 24; 7; 16500; true;  golden; 1295
 SPEEDELEC Booster; 65; 20300; false; 15500;  red; 175
 E-BIKE Porshe Design; 60; 27000; false; 13000;  marine; 659
-SPEEDELEC AirWheel; 15; 11200; false; 11

@@ -4,6 +4,7 @@ import com.ecobike.app.model.AbstractBike;
 import com.ecobike.app.model.EBike;
 import com.ecobike.app.model.FoldingBike;
 import com.ecobike.app.model.SpeedElec;
+import com.ecobike.app.model.enumerator.BikeType;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,7 +20,6 @@ public class BikeBuilderService {
         try {
             if (bikeClass.equals(EBike.class)) {
                 return createEBike();
-
             } else if (bikeClass.equals(SpeedElec.class)) {
                 return createSpeedElec();
             } else if (bikeClass.equals(FoldingBike.class)) {
@@ -35,6 +35,7 @@ public class BikeBuilderService {
 
     private EBike createEBike() {
         return EBike.builder()
+                .type(BikeType.E_BIKE.getBikeType())
                 .brand(inputService.inputBrand(EBike.class))
                 .maxSpeed(inputService.inputMaxSpeed())
                 .weight(inputService.inputWeight())
@@ -47,6 +48,7 @@ public class BikeBuilderService {
 
     private SpeedElec createSpeedElec() {
         return SpeedElec.builder()
+                .type(BikeType.SPEEDELEC.getBikeType())
                 .brand(inputService.inputBrand(EBike.class))
                 .maxSpeed(inputService.inputMaxSpeed())
                 .weight(inputService.inputWeight())
@@ -59,6 +61,7 @@ public class BikeBuilderService {
 
     private FoldingBike createFoldingBike() {
         return FoldingBike.builder()
+                .type(BikeType.FOLDING_BIKE.getBikeType())
                 .brand(inputService.inputBrand(EBike.class))
                 .wheelSize(inputService.inputWheelSize())
                 .numOfGears(inputService.inputNumOfGears())

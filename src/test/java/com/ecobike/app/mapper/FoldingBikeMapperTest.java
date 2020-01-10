@@ -9,8 +9,6 @@ import java.math.BigDecimal;
 
 import static org.springframework.test.util.AssertionErrors.assertEquals;
 
-
-@SpringBootTest
 public class FoldingBikeMapperTest {
     private FoldingBikeMapper foldingBikeMapper = new FoldingBikeMapper();
 

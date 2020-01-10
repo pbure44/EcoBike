@@ -24,20 +24,20 @@ public class SpeedElec extends AbstractBike {
     private Integer batteryCapacity;
 
     @Builder
-    public SpeedElec(String brand, int weight, boolean lights, String colour, BigDecimal price, int maxSpeed, int batteryCapacity) {
-        super(brand, weight, lights, colour, price);
+    public SpeedElec(String type, String brand, int weight, boolean lights, String colour, BigDecimal price, int maxSpeed, int batteryCapacity) {
+        super(type, brand, weight, lights, colour, price);
         this.maxSpeed = maxSpeed;
         this.batteryCapacity = batteryCapacity;
     }
 
     @Override
     public String toString() {
-        return super.getBrand() + " with " + batteryCapacity + " mAh battery and " + super.getLights() +
+        return super.getType() +" "+super.getBrand() + " with " + batteryCapacity + " mAh battery and " + super.getLights() +
                 " head/tail light.\n" + "Price: " + super.getPrice() + " euros.";
     }
 
     @Override
     public String toList() {
-        return super.getBrand() + "; " + maxSpeed + "; " + super.getWeight() + "; " + super.getLights() + "; " + batteryCapacity + "; " + super.getColour() + "; " + super.getPrice();
+        return super.getType() +" "+super.getBrand() + "; " + maxSpeed + "; " + super.getWeight() + "; " + super.getLights() + "; " + batteryCapacity + "; " + super.getColour() + "; " + super.getPrice();
     }
 }
