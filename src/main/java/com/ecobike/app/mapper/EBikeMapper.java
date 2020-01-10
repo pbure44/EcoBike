@@ -8,7 +8,7 @@ public class EBikeMapper {
     public EBike toEBike(String[] tokens) {
         return EBike.builder()
                 .type(tokens[0])
-                .brand(tokens[1])
+                .brand(tokens[1].trim())
                 .maxSpeed(Integer.valueOf(tokens[2].trim()))
                 .weight(Integer.valueOf(tokens[3].trim()))
                 .lights(Boolean.valueOf(tokens[4].trim()))

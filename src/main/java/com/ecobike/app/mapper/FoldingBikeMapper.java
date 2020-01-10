@@ -8,7 +8,7 @@ public class FoldingBikeMapper {
     public FoldingBike toFoldingBike(String[] tokens) {
         return FoldingBike.builder()
                 .type(tokens[0])
-                .brand(tokens[1])
+                .brand(tokens[1].trim())
                 .wheelSize(Integer.valueOf(tokens[2].trim()))
                 .numOfGears(Integer.valueOf(tokens[3].trim()))
                 .weight(Integer.valueOf(tokens[4].trim()))

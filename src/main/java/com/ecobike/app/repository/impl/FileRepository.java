@@ -45,11 +45,11 @@ public class FileRepository implements IFileRepository {
         while ((str = in.readLine()) != null) {
             String[] tokens = str.split(";");
             if (tokens[0].contains(BikeType.SPEEDELEC.getBikeType())) {
-                addInGeneralList(speedelecMapper.toSpeedElec(splitTypeBrand(tokens)));
+                addInGeneralList(speedelecMapper.toSpeedElec(splitTypeBrand(tokens,BikeType.SPEEDELEC.getBikeType())));
             } else if (tokens[0].contains(BikeType.FOLDING_BIKE.getBikeType())) {
-                addInGeneralList(foldingBikeMapper.toFoldingBike(splitTypeBrand(tokens)));
+                addInGeneralList(foldingBikeMapper.toFoldingBike(splitTypeBrand(tokens,BikeType.FOLDING_BIKE.getBikeType())));
             } else if (tokens[0].contains(BikeType.E_BIKE.getBikeType())) {
-                addInGeneralList(eBikeMapper.toEBike(splitTypeBrand(tokens)));
+                addInGeneralList(eBikeMapper.toEBike(splitTypeBrand(tokens,BikeType.E_BIKE.getBikeType())));
             } else {
                 throw new IllegalArgumentException("Error in If-Else readFile method");
             }
@@ -82,9 +82,9 @@ public class FileRepository implements IFileRepository {
         BIKES.add(bike);
     }
 
-    private String[] splitTypeBrand(String[] tokens) {
+    private String[] splitTypeBrand(String[] tokens, String bikeType) {
         String[] tokensFinal = new String[tokens.length + 1];
-        tokensFinal[0] = BikeType.SPEEDELEC.getBikeType();
+        tokensFinal[0] = bikeType;
         tokensFinal[1] = tokens[0].replace(tokensFinal[0], "");
         System.arraycopy(tokens, 1, tokensFinal, 2, tokens.length - 1);
         return tokensFinal;
