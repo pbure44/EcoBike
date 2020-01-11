@@ -33,7 +33,7 @@ public abstract class AbstractBike {
     @Override
     public String toString() {
         return "AbstractBike{" +
-                "type='" + brand + '\'' +
+                "type='" + type + '\'' +
                 ", brand='" + brand + '\'' +
                 ", weight=" + weight +
                 ", lights=" + lights +
@@ -44,7 +44,7 @@ public abstract class AbstractBike {
 
     public String toList(){
         return "AbstractBike{" +
-                "type='" + brand + '\'' +
+                "type='" + type + '\'' +
                 ", brand='" + brand + '\'' +
                 ", weight=" + weight +
                 ", lights=" + lights +

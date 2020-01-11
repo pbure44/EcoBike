@@ -22,7 +22,7 @@ public class FoldingBike extends AbstractBike {
     private Integer numOfGears;
 
     @Builder
-    public FoldingBike(String type, String brand, int weight, Boolean lights, String colour, BigDecimal price, int wheelSize, int numOfGears) {
+    public FoldingBike(String type, String brand, int wheelSize, int numOfGears, int weight, Boolean lights, String colour, BigDecimal price) {
         super(type, brand, weight, lights, colour, price);
         this.wheelSize = wheelSize;
         this.numOfGears = numOfGears;
@@ -30,8 +30,8 @@ public class FoldingBike extends AbstractBike {
 
     @Override
     public String toString() {
-        return super.getType() +" "+super.getBrand() + "; with " + numOfGears + " gear(s) and " + super.getLights() +
-                " head/tail light.\n" + "Price: " + super.getPrice() + " euros.";
+        return super.getType() +" "+super.getBrand() + "; with " + numOfGears + " gear(s) and " + (super.getLights() ? "" : "no ") +
+                "head/tail light.\n" + "Price: " + super.getPrice() + " euros.";
     }
 
     @Override

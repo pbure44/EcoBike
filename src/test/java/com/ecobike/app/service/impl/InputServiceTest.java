@@ -34,7 +34,7 @@ class InputServiceTest {
     @Test
     void inputSpeedelecBrandSuccess() throws IOException {
         when(reader.readLine()).thenReturn("Booster");
-        String brand = inputService.inputBrand(SpeedElec.class);
+        String brand = inputService.inputBrand();
         assertNotNull(brand);
         assertEquals("SPEEDELEC Booster", brand);
     }
@@ -42,7 +42,7 @@ class InputServiceTest {
     @Test
     void inputEBikeBrandSuccess() throws IOException {
         when(reader.readLine()).thenReturn("Booster");
-        String brand = inputService.inputBrand(SpeedElec.class);
+        String brand = inputService.inputBrand();
         assertNotNull(brand);
         assertEquals("E-BIKE Booster", brand);
     }
@@ -50,7 +50,7 @@ class InputServiceTest {
     @Test
     void inputFoldingBrandSuccess() throws IOException {
         when(reader.readLine()).thenReturn("Booster");
-        String brand = inputService.inputBrand(SpeedElec.class);
+        String brand = inputService.inputBrand();
         assertNotNull(brand);
         assertEquals("FOLDING BIKE Booster", brand);
     }

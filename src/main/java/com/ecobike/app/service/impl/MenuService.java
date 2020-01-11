@@ -77,6 +77,7 @@ public class MenuService {
                     default:
                         throw new IllegalArgumentException();
                 }
+                break;
             }
         } catch (IOException e) {
             e.printStackTrace();

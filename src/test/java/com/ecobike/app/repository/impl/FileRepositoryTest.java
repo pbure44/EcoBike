@@ -31,10 +31,10 @@ public class FileRepositoryTest {
 
     @Test
     public void readFile() throws IOException {
-//        fileRepository.readFile(DATA_FILE);
-//        List<AbstractBike> list = listArgumentCaptor.getValue();
-//        assertTrue(list.size() > 0);
-//        assertEquals(3, list.size());
+        fileRepository.readFile(DATA_FILE);
+        List<AbstractBike> list = listArgumentCaptor.getValue();
+        assertTrue(list.size() > 0);
+        assertEquals(3, list.size());
     }
 
     @Test

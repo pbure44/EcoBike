@@ -17,23 +17,12 @@ public class InputService {
 
     private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-    public String inputBrand(Class bikeClass) {
+    public String inputBrand() {
         System.out.println();
         System.out.println("Please enter the Brand name");
         while (true) {
             try {
-                if (bikeClass.equals(EBike.class)) {
-                    String str = BikeType.E_BIKE + " " + reader.readLine();
-                    return str;
-                } else if (bikeClass.equals(FoldingBike.class)) {
-                    String str = BikeType.FOLDING_BIKE + " " + reader.readLine();
-                    return str;
-                } else if (bikeClass.equals(SpeedElec.class)) {
-                    String str = BikeType.SPEEDELEC + " " + reader.readLine();
-                    return str;
-                } else {
-                    System.out.println("Wrong parameter 'bikeClass'");
-                }
+                return reader.readLine();
             } catch (IOException e) {
                 System.out.println("Error in input Brand method");
             }

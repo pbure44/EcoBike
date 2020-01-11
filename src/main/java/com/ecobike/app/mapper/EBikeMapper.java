@@ -13,7 +13,7 @@ public class EBikeMapper {
                 .weight(Integer.valueOf(tokens[3].trim()))
                 .lights(Boolean.valueOf(tokens[4].trim()))
                 .batteryCapacity(Integer.valueOf(tokens[5].trim()))
-                .colour(tokens[6])
+                .colour(tokens[6].trim())
                 .price(BigDecimal.valueOf(Long.valueOf(tokens[7].trim())))
                 .build();
     }

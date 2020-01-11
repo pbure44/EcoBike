@@ -36,7 +36,7 @@ public class BikeBuilderService {
     private EBike createEBike() {
         return EBike.builder()
                 .type(BikeType.E_BIKE.getBikeType())
-                .brand(inputService.inputBrand(EBike.class))
+                .brand(inputService.inputBrand())
                 .maxSpeed(inputService.inputMaxSpeed())
                 .weight(inputService.inputWeight())
                 .lights(inputService.inputLights())
@@ -49,7 +49,7 @@ public class BikeBuilderService {
     private SpeedElec createSpeedElec() {
         return SpeedElec.builder()
                 .type(BikeType.SPEEDELEC.getBikeType())
-                .brand(inputService.inputBrand(EBike.class))
+                .brand(inputService.inputBrand())
                 .maxSpeed(inputService.inputMaxSpeed())
                 .weight(inputService.inputWeight())
                 .lights(inputService.inputLights())
@@ -62,7 +62,7 @@ public class BikeBuilderService {
     private FoldingBike createFoldingBike() {
         return FoldingBike.builder()
                 .type(BikeType.FOLDING_BIKE.getBikeType())
-                .brand(inputService.inputBrand(EBike.class))
+                .brand(inputService.inputBrand())
                 .wheelSize(inputService.inputWheelSize())
                 .numOfGears(inputService.inputNumOfGears())
                 .weight(inputService.inputWeight())

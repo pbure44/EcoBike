@@ -71,6 +71,7 @@ public class FileRepository implements IFileRepository {
             for (AbstractBike list : BIKES) {
                 fileWriter.write(list.toList() + System.getProperty("line.separator"));
             }
+            fileWriter.close();
         }
     }
 
