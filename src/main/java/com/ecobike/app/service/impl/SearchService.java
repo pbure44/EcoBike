@@ -1,32 +1,24 @@
 package com.ecobike.app.service.impl;
 
-import com.ecobike.app.model.AbstractBike;
-import com.ecobike.app.repository.impl.FileRepository;
+import com.ecobike.app.repository.IFileRepository;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class SearchService {
+    private final IFileRepository fileRepository;
+    private final LinearSearch linearSearch;
     private final InputService inputService;
     private final BikeBuilderService bikeBuilderService;
-    private final FileRepository fileRepository;
-    private List<AbstractBike> bikeList;
-    private LinearSearch linearSearch;
 
-    public SearchService(InputService inputService, BikeBuilderService bikeBuilderService, FileRepository fileRepository) {
+    public SearchService(IFileRepository fileRepository, LinearSearch linearSearch, InputService inputService, BikeBuilderService bikeBuilderService) {
+        this.fileRepository = fileRepository;
+        this.linearSearch = linearSearch;
         this.inputService = inputService;
         this.bikeBuilderService = bikeBuilderService;
-        this.fileRepository = fileRepository;
     }
 
-    public void find() {
-        search(bikeBuilderService.builder(inputService.findBikeType()));
-    }
-
-    private void search(AbstractBike bike){
-        bikeList = FileRepository.getBIKES();
-        linearSearch = new LinearSearch(bike,bikeList);
-        linearSearch.linearSearch(bike);
+    public void search() {
+        Class bikeType = inputService.findBikeType();
+        linearSearch.linearSearch(bikeBuilderService.builder(bikeType), fileRepository.getBikes());
     }
 }

@@ -1,10 +1,8 @@
 package com.ecobike.app.model;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.context.annotation.Bean;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -42,14 +40,5 @@ public abstract class AbstractBike {
                 " euros.";
     }
 
-    public String toList(){
-        return "AbstractBike{" +
-                "type='" + type + '\'' +
-                ", brand='" + brand + '\'' +
-                ", weight=" + weight +
-                ", lights=" + lights +
-                ", colour='" + colour + '\'' +
-                ",\n Price: " + price +
-                " euros.";
-    }
+    public abstract String format();
 }

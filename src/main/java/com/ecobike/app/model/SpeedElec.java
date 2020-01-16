@@ -1,11 +1,9 @@
 package com.ecobike.app.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
@@ -32,12 +30,12 @@ public class SpeedElec extends AbstractBike {
 
     @Override
     public String toString() {
-        return super.getType() +" "+super.getBrand() + " with " + batteryCapacity + " mAh battery and " + (super.getLights() ? "" : "no ") +
+        return super.getType() + " " + super.getBrand() + " with " + batteryCapacity + " mAh battery and " + (super.getLights() ? "" : "no ") +
                 "head/tail light.\n" + "Price: " + super.getPrice() + " euros.";
     }
 
     @Override
-    public String toList() {
-        return super.getType() +" "+super.getBrand() + "; " + maxSpeed + "; " + super.getWeight() + "; " + super.getLights() + "; " + batteryCapacity + "; " + super.getColour() + "; " + super.getPrice();
+    public String format() {
+        return super.getType() + " " + super.getBrand() + "; " + maxSpeed + "; " + super.getWeight() + "; " + super.getLights() + "; " + batteryCapacity + "; " + super.getColour() + "; " + super.getPrice();
     }
 }

@@ -4,43 +4,38 @@ import com.ecobike.app.model.EBike;
 import com.ecobike.app.model.FoldingBike;
 import com.ecobike.app.model.SpeedElec;
 import com.ecobike.app.service.ICatalogService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+@Slf4j
 @Service
 public class MenuService {
     private final ICatalogService catalogService;
     private BufferedReader reader;
-    private static String fileName;
 
     public MenuService(CatalogService catalogService) {
         this.catalogService = catalogService;
         this.reader = new BufferedReader(new InputStreamReader(System.in));
     }
 
-    @PostConstruct
-    public void init() throws IOException {
-        menuStart();
-    }
-
-    public void menuStart() throws IOException {
+    public void menuStart() {
         try {
             System.out.println("Please enter the route to datafile");
-            fileName = reader.readLine();
+            String fileName = reader.readLine();
             catalogService.readFile(fileName);
             System.out.println("DataFile loaded successfully");
-            menuList();
-        } catch (IOException e) {
-            System.out.println("DataFile not found, please check filename and path");
-            menuStart();
+            menuList(fileName);
+        } catch (Exception e) {
+            log.warn("Menu start: failed to execute program");
+            System.err.println("Failed to execute program, try again");
         }
     }
 
-    private void menuList() {
+    private void menuList(String fileName) {
         try {
             while (true) {
                 System.out.println("* * * * * * *");
@@ -49,13 +44,13 @@ public class MenuService {
                         "2 – Add a new folding bike\n" +
                         "3 – Add a new speedelec\n" +
                         "4 – Add a new e-bike\n" +
-                        "5 – Find the first item of a particular brand\n" +
+                        "5 – Find the first item\n" +
                         "6 – Write to file\n" +
                         "7 – Stop the program");
-                Integer num = Integer.parseInt(reader.readLine());
+                int num = Integer.parseInt(reader.readLine());
                 switch (num) {
                     case 1:
-                        catalogService.showAll(); // правильно ли дергать из repository??
+                        catalogService.showAll();
                         continue;
                     case 2:
                         catalogService.add(FoldingBike.class);
@@ -75,15 +70,13 @@ public class MenuService {
                     case 7:
                         break;
                     default:
-                        throw new IllegalArgumentException();
+                        System.err.println("Incorrect input, please enter number from 1 to 7");
+                        continue;
                 }
                 break;
             }
         } catch (IOException e) {
-            e.printStackTrace();
-        } catch (IllegalArgumentException e) {
-            System.out.println("Incorrect input, please enter number from 1 to 7");
-            menuList();
+            System.err.println("Some error in menu list");
         }
     }
 }

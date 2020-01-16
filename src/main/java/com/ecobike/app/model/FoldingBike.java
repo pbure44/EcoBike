@@ -1,6 +1,5 @@
 package com.ecobike.app.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -30,12 +29,12 @@ public class FoldingBike extends AbstractBike {
 
     @Override
     public String toString() {
-        return super.getType() +" "+super.getBrand() + "; with " + numOfGears + " gear(s) and " + (super.getLights() ? "" : "no ") +
+        return super.getType() + " " + super.getBrand() + "; with " + numOfGears + " gear(s) and " + (super.getLights() ? "" : "no ") +
                 "head/tail light.\n" + "Price: " + super.getPrice() + " euros.";
     }
 
     @Override
-    public String toList() {
-        return super.getType() +" "+super.getBrand() + "; " + wheelSize + "; " + numOfGears + "; " + super.getWeight() + "; " + super.getLights() + "; " + super.getColour() + "; " + super.getPrice();
+    public String format() {
+        return super.getType() + " " + super.getBrand() + "; " + wheelSize + "; " + numOfGears + "; " + super.getWeight() + "; " + super.getLights() + "; " + super.getColour() + "; " + super.getPrice();
     }
 }

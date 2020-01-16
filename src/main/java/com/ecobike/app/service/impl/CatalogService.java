@@ -4,15 +4,17 @@ import com.ecobike.app.model.AbstractBike;
 import com.ecobike.app.repository.IFileRepository;
 import com.ecobike.app.repository.impl.FileRepository;
 import com.ecobike.app.service.ICatalogService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 
 @Service
+@Slf4j
 public class CatalogService implements ICatalogService {
     private final IFileRepository fileRepository;
     private final BikeBuilderService bikeBuilderService;
-    private SearchService searchService;
+    private final SearchService searchService;
 
     public CatalogService(FileRepository fileRepository, BikeBuilderService bikeBuilderService, SearchService searchService) {
         this.fileRepository = fileRepository;
@@ -27,22 +29,28 @@ public class CatalogService implements ICatalogService {
 
     @Override
     public void findOne() {
-
-        searchService.find();
+        searchService.search();
     }
 
     @Override
     public void add(Class bikeClass) {
         AbstractBike abstractBike = bikeBuilderService.builder(bikeClass);
-        fileRepository.add(abstractBike);
+        if (abstractBike != null) {
+            fileRepository.add(abstractBike);
+        } else {
+            log.warn("Adding bike: failed to get bike from builder={}", bikeClass.getName());
+            System.err.println("Bike was not added");
+        }
     }
 
     @Override
+
     public void writeToFile(String fileName) {
         try {
             fileRepository.writeToFile(fileName);
         } catch (IOException e) {
-            e.printStackTrace();
+            log.warn("Write to file: failed to write bikes to file={}", fileName);
+            System.err.println("Wrote to file failed");
         }
     }
 
@@ -51,7 +59,7 @@ public class CatalogService implements ICatalogService {
         try {
             fileRepository.readFile(fileName);
         } catch (IOException e) {
-            System.out.println("File Read Error");
+            System.err.println("File reading failed");
         }
     }
 }

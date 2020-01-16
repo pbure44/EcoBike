@@ -14,7 +14,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -33,7 +32,7 @@ public class FileRepository implements IFileRepository {
         this.foldingBikeMapper = new FoldingBikeMapper();
     }
 
-    public static List<AbstractBike> getBIKES() {
+    public List<AbstractBike> getBikes() {
         return BIKES;
     }
 
@@ -45,13 +44,13 @@ public class FileRepository implements IFileRepository {
         while ((str = in.readLine()) != null) {
             String[] tokens = str.split(";");
             if (tokens[0].contains(BikeType.SPEEDELEC.getBikeType())) {
-                addInGeneralList(speedelecMapper.toSpeedElec(splitTypeBrand(tokens,BikeType.SPEEDELEC.getBikeType())));
+                addInGeneralList(speedelecMapper.toSpeedElec(splitTypeBrand(tokens, BikeType.SPEEDELEC.getBikeType())));
             } else if (tokens[0].contains(BikeType.FOLDING_BIKE.getBikeType())) {
-                addInGeneralList(foldingBikeMapper.toFoldingBike(splitTypeBrand(tokens,BikeType.FOLDING_BIKE.getBikeType())));
+                addInGeneralList(foldingBikeMapper.toFoldingBike(splitTypeBrand(tokens, BikeType.FOLDING_BIKE.getBikeType())));
             } else if (tokens[0].contains(BikeType.E_BIKE.getBikeType())) {
-                addInGeneralList(eBikeMapper.toEBike(splitTypeBrand(tokens,BikeType.E_BIKE.getBikeType())));
+                addInGeneralList(eBikeMapper.toEBike(splitTypeBrand(tokens, BikeType.E_BIKE.getBikeType())));
             } else {
-                throw new IllegalArgumentException("Error in If-Else readFile method");
+                System.out.println("Invalid bike type in file");
             }
         }
     }
@@ -69,7 +68,7 @@ public class FileRepository implements IFileRepository {
             FileWriter fileWriter = new FileWriter(fileName, false);
             BIKES.addAll(NEW_BIKES);
             for (AbstractBike list : BIKES) {
-                fileWriter.write(list.toList() + System.getProperty("line.separator"));
+                fileWriter.write(list.format() + System.getProperty("line.separator"));
             }
             fileWriter.close();
         }

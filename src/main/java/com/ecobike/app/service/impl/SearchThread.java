@@ -12,11 +12,6 @@ public class SearchThread implements Runnable {
     private int endIndex;
     private AbstractBike searchBike;
     private List<AbstractBike> bikeList;
-
-    public String getThreadName() {
-        return threadName;
-    }
-
     private String threadName;
 
     public SearchThread(int startIndex, int endIndex, AbstractBike searchBike, List<AbstractBike> bikeList, String threadName) {
@@ -31,10 +26,10 @@ public class SearchThread implements Runnable {
     public void run() {
 
         AbstractBike bike = bikeCheck();
-        if (bike == null) {
-            System.out.println("Such bike NOT FOUND");
+        if (bike != null) {
+            System.out.println(threadName + " - There is such bike:\n" + bike);
         } else {
-            System.out.println("There is such bike" + bike);
+            System.out.println(threadName + " - Such bike NOT FOUND");
         }
 
     }
@@ -48,45 +43,8 @@ public class SearchThread implements Runnable {
         return null;
     }
 
-
     private boolean checkParameters(AbstractBike existedBike) {
-        if (!existedBike.getBrand().equalsIgnoreCase(searchBike.getBrand())) return false;
-        if (!existedBike.getWeight().equals(searchBike.getWeight())) return false;
-        if (!existedBike.getLights().equals(searchBike.getLights())) return false;
-        if (!existedBike.getColour().equalsIgnoreCase(searchBike.getColour())) return false;
-        if (!existedBike.getPrice().equals(searchBike.getPrice())) return false;
-        if (existedBike.getClass().equals(EBike.class) && searchBike.getClass().equals(EBike.class)) {
-            return checkEBikeParameters(existedBike);
-        } else if (existedBike.getClass().equals(SpeedElec.class) && searchBike.getClass().equals(SpeedElec.class)) {
-            return checkSpeedElecParameters(existedBike);
-        } else if (existedBike.getClass().equals(FoldingBike.class) && searchBike.getClass().equals(FoldingBike.class)) {
-            return checkFoldingBikeParameters(existedBike);
-        }
-        return true;
-    }
-
-    private boolean checkEBikeParameters(AbstractBike existedBike) {
-        EBike existBike = (EBike) existedBike;
-        EBike srchBike = (EBike) searchBike;
-        if (!existBike.getMaxSpeed().equals(srchBike.getMaxSpeed())) return false;
-        if (!existBike.getBatteryCapacity().equals(srchBike.getBatteryCapacity())) return false;
-        return true;
-    }
-
-    private boolean checkSpeedElecParameters(AbstractBike existedBike) {
-        SpeedElec existBike = (SpeedElec) existedBike;
-        SpeedElec srchBike = (SpeedElec) searchBike;
-        if (!existBike.getMaxSpeed().equals(srchBike.getMaxSpeed())) return false;
-        if (!existBike.getBatteryCapacity().equals(srchBike.getBatteryCapacity())) return false;
-        return true;
-    }
-
-    private boolean checkFoldingBikeParameters(AbstractBike existedBike) {
-        FoldingBike existBike = (FoldingBike) existedBike;
-        FoldingBike srchBike = (FoldingBike) searchBike;
-        if (!existBike.getWheelSize().equals(srchBike.getWheelSize())) return false;
-        if (!existBike.getNumOfGears().equals(srchBike.getNumOfGears())) return false;
-        return true;
+        return existedBike.equals(searchBike);
     }
 
 }
