@@ -7,6 +7,7 @@ import com.ecobike.app.model.AbstractBike;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
+import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,15 +23,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class FileRepositoryTest {
 
     private final static String DATA_FILE = "src\\test\\java\\com\\ecobike\\app\\repository\\impl\\data\\success-test.txt";
-    private SpeedelecMapper speedelecMapper = new SpeedelecMapper();;
-    private EBikeMapper eBikeMapper = new EBikeMapper();
-    private FoldingBikeMapper foldingBikeMapper = new FoldingBikeMapper();
-    @Autowired
+
+    @Mock
     private FileRepository fileRepository;
     private ArgumentCaptor<List<AbstractBike>> listArgumentCaptor = ArgumentCaptor.forClass(List.class);
 
     @Test
-    public void readFile() throws IOException {
+    public void testReadFile() throws IOException {
         fileRepository.readFile(DATA_FILE);
         List<AbstractBike> list = listArgumentCaptor.getValue();
         assertTrue(list.size() > 0);

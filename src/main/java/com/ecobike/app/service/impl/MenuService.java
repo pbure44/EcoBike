@@ -44,7 +44,7 @@ public class MenuService {
                         "2 – Add a new folding bike\n" +
                         "3 – Add a new speedelec\n" +
                         "4 – Add a new e-bike\n" +
-                        "5 – Find the first item\n" +
+                        "5 – Find bike\n" +
                         "6 – Write to file\n" +
                         "7 – Stop the program");
                 int num = Integer.parseInt(reader.readLine());

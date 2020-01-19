@@ -13,9 +13,10 @@ public class SpeedelecMapperTest {
 
     @Test
     public void testToSpeedElec() {
-        String[] tokens = {"brand", "50", "15000", "true", "10000", "white", "2000"};
+        String[] tokens = {"SPEEDELEC","brand", "50", "15000", "true", "10000", "white", "2000"};
         SpeedElec bikeTest = speedelecMapper.toSpeedElec(tokens);
         SpeedElec speedElec = new SpeedElec();
+        speedElec.setType("SPEEDELEC");
         speedElec.setBrand("brand");
         speedElec.setBatteryCapacity(10000);
         speedElec.setMaxSpeed(50);

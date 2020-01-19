@@ -14,9 +14,10 @@ public class FoldingBikeMapperTest {
 
     @Test
     public void testToFoldingBike() {
-        String[] tokens = {"brand", "26", "2", "15000", "true", "white", "2000"};
+        String[] tokens = {"FOLDING BIKE","brand", "26", "2", "15000", "true", "white", "2000"};
         FoldingBike bikeTest = foldingBikeMapper.toFoldingBike(tokens);
         FoldingBike foldingBike = new FoldingBike();
+        foldingBike.setType("FOLDING BIKE");
         foldingBike.setBrand("brand");
         foldingBike.setWheelSize(26);
         foldingBike.setNumOfGears(2);

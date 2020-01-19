@@ -21,7 +21,7 @@ class InputServiceTest {
     private InputService inputService = new InputService();
 
     @Test
-    void inputSpeedelecBrandSuccess() throws IOException {
+    void testInputSpeedelecBrandSuccess() throws IOException {
         when(reader.readLine()).thenReturn("Booster");
         String brand = inputService.inputBrand();
         assertNotNull(brand);
@@ -29,7 +29,7 @@ class InputServiceTest {
     }
 
     @Test
-    void inputEBikeBrandSuccess() throws IOException {
+    void testInputEBikeBrandSuccess() throws IOException {
         when(reader.readLine()).thenReturn("Booster");
         String brand = inputService.inputBrand();
         assertNotNull(brand);
@@ -37,16 +37,11 @@ class InputServiceTest {
     }
 
     @Test
-    void inputFoldingBrandSuccess() throws IOException {
+    void testInputFoldingBrandSuccess() throws IOException {
         when(reader.readLine()).thenReturn("Booster");
         String brand = inputService.inputBrand();
         assertNotNull(brand);
         assertEquals("FOLDING BIKE Booster", brand);
     }
 
-//    @Bean
-//    @Primary
-//    public MenuService menuService(){
-//        return mock(MenuService.class);
-//    }
 }

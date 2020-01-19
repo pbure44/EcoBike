@@ -14,9 +14,10 @@ public class EBikeMapperTest {
 
     @Test
     public void testToEBikeSuccess() {
-        String[] tokens = {"brand", "50", "15000", "true", "10000", "white", "2000"};
+        String[] tokens = {"E-BIKE","brand", "50", "15000", "true", "10000", "white", "2000"};
         EBike bikeTest = eBikeMapper.toEBike(tokens);
         EBike eBike = new EBike();
+        eBike.setType("E-BIKE");
         eBike.setBrand("brand");
         eBike.setBatteryCapacity(10000);
         eBike.setMaxSpeed(50);
